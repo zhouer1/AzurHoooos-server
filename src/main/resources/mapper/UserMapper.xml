@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhouer.azurhoooos.mapper.UserMapper">
+    <select id="selectAccessId" resultType="Integer">
+        select access_id from roles_accesses
+            <where>
+                <foreach  collection="list" item="item">
+                   or role_id= #{item}
+                </foreach>
+            </where>
+
+    </select>
+    <select id="selectAccess" resultType="String">
+        select access from accesses
+        <where>
+            <foreach  collection="list" item="item">
+                or id= #{item}
+            </foreach>
+        </where>
+    </select>
+
+</mapper>

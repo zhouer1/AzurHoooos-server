@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhouer.azurhoooos.mapper.RegistrationRecordMapper">
+
+    <update id="createTempTableBySelector">
+        create table if not exists temp_registration_record as
+            select * from registration_record
+        <where>
+            category in
+            <foreach  collection="category" item="item"  open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            and camp in
+            <foreach  collection="camp" item="item"  open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </update>
+
+</mapper>
